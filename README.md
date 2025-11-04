@@ -1,115 +1,79 @@
-# Lowkey Coki - Beach Hookah Lounge Website
+# 🏖️ Lowkey Coki - Beach Hookah Lounge
 
-A premium, modern website for a beach hookah lounge at Coki Beach, St. Thomas, USVI. Features live events, online reservations, gallery, and private event booking.
+Premium beach hookah lounge website for Coki Beach, St. Thomas, USVI.
 
-## 🌴 Features
+## 🌐 Live Site
 
-- **Beautiful Landing Page**: Full-screen hero with parallax effects and beach vibes
-- **Live Events & DJs**: Showcase upcoming events with booking capabilities
-- **Menu & Flavors**: Display hookah flavors and packages
-- **Online Reservations**: Book beach sessions with deposit integration
-- **Gallery**: Filterable image gallery with lightbox
-- **Private Events**: Contact form for custom event inquiries
-- **Mobile Responsive**: Fully optimized for all devices
-- **SEO Optimized**: Built with Next.js for excellent search engine performance
+**Production**: [https://akouviyk.github.io/lowkeycoki](https://akouviyk.github.io/lowkeycoki)
 
-## 🚀 Tech Stack
+---
 
-- **Frontend**: Next.js 14 (React) with TypeScript
-- **Styling**: TailwindCSS with custom beach/nightlife theme
-- **Animations**: Framer Motion for smooth transitions
-- **Database**: Firebase Firestore
-- **Authentication**: Firebase Auth
-- **Images**: Cloudflare Images for optimization and delivery
-- **Payments**: Stripe (for deposits)
-- **Hosting**: Vercel (recommended)
+## 🚀 Quick Deploy
 
-## 📋 Prerequisites
+### Option 1: Automatic Deploy (Recommended)
 
-- Node.js 18+ installed
-- npm or yarn package manager
-- Firebase account
-- Cloudflare account (for Images)
-- Stripe account (for payments)
+Every push to `main` automatically deploys via GitHub Actions.
 
-## 🛠️ Installation
-
-1. **Clone or navigate to the project**:
-   ```bash
-   cd "/Users/akouvi/Desktop/lowkey coki"
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**:
-   - Copy `.env.example` to `.env.local`:
-     ```bash
-     cp .env.example .env.local
-     ```
-   - Fill in your credentials (see Configuration section below)
-
-4. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
-
-5. **Open your browser**:
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## ⚙️ Configuration
-
-### Firebase Setup
-
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project
-3. Enable Firestore Database
-4. Enable Authentication (Email/Phone/Google)
-5. Copy your config values to `.env.local`
-
-### Firestore Security Rules
-
-Apply these security rules in Firebase Console:
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /menus/{menuId} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.token.admin == true;
-    }
-    match /events/{eventId} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.token.admin == true;
-    }
-    match /reservations/{resId} {
-      allow create: if request.auth != null;
-      allow read, update, delete: if request.auth != null && 
-        (resource.data.userId == request.auth.uid || request.auth.token.admin == true);
-    }
-    match /users/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
-      allow write: if request.auth != null && request.auth.uid == uid;
-    }
-  }
-}
+```bash
+git add .
+git commit -m "Update site"
+git push origin main
 ```
 
-### Cloudflare Images Setup
+### Option 2: Manual Deploy
 
-1. Sign up for [Cloudflare Images](https://www.cloudflare.com/products/cloudflare-images/)
-2. Get your Account ID and API Token
-3. Get your Account Hash from the Images dashboard
-4. Add credentials to `.env.local`
+```bash
+npm run deploy
+```
 
-### Stripe Setup
+Or use the helper script:
 
-1. Create a [Stripe account](https://stripe.com)
-2. Get your publishable and secret keys
-3. Add them to `.env.local`
+```bash
+chmod +x deploy-simple.sh
+./deploy-simple.sh
+```
+
+---
+
+## 🛠️ Development
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Open http://localhost:3000
+```
+
+### Build for Production
+
+```bash
+# Create production build
+npm run build
+
+# Output will be in the 'out' directory
+```
+
+### Test Production Build Locally
+
+```bash
+# After building
+cd out
+python3 -m http.server 8000
+
+# Visit http://localhost:8000/lowkeycoki
+```
+
+---
 
 ## 📁 Project Structure
 
@@ -117,104 +81,167 @@ service cloud.firestore {
 lowkey-coki/
 ├── src/
 │   ├── app/
-│   │   ├── api/              # API routes
-│   │   ├── globals.css       # Global styles
-│   │   ├── layout.tsx        # Root layout
-│   │   └── page.tsx          # Home page
-│   ├── components/           # React components
-│   │   ├── Navigation.tsx
+│   │   ├── layout.tsx       # Root layout with metadata
+│   │   ├── page.tsx         # Home page
+│   │   ├── not-found.tsx    # 404 page
+│   │   └── globals.css      # Global styles
+│   ├── components/          # React components
 │   │   ├── Hero.tsx
+│   │   ├── Navigation.tsx
 │   │   ├── Events.tsx
 │   │   ├── Menu.tsx
-│   │   ├── Reservations.tsx
-│   │   ├── Gallery.tsx
-│   │   ├── About.tsx
-│   │   ├── Contact.tsx
-│   │   └── Footer.tsx
-│   └── lib/                  # Utilities
-│       ├── firebase.ts
-│       └── cloudflare.ts
-├── public/                   # Static assets
-├── tailwind.config.js        # Tailwind configuration
+│   │   └── ...
+│   └── lib/                 # Utilities
+├── public/                  # Static assets
+│   ├── favicon.svg
+│   └── girl-smoking-hookah.mp4
+├── .github/
+│   └── workflows/
+│       └── deploy.yml       # GitHub Actions deployment
 ├── next.config.js           # Next.js configuration
-└── package.json
+├── package.json             # Dependencies
+└── tailwind.config.js       # Tailwind CSS config
 ```
-
-## 🎨 Design System
-
-### Colors
-- **Sand**: `#F6E9D7` - Warm beach background
-- **Teal**: `#005B6E` - Deep ocean accent
-- **Coral**: `#FF6F59` - Sunset highlight
-- **Midnight**: `#0F0F10` - Near-black for contrast
-- **Gold**: `#D4AF37` - Premium accent
-
-### Typography
-- **Headlines**: Condensed/Display font
-- **Body**: Helvetica Neue / System stack
-
-## 🚢 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Go to [Vercel](https://vercel.com)
-3. Import your repository
-4. Add environment variables
-5. Deploy!
-
-### Environment Variables for Production
-
-Make sure to add all environment variables from `.env.local` to your hosting platform.
-
-## 🔐 Security Notes
-
-- Never commit `.env.local` to git
-- Keep Firebase and Cloudflare API keys secure
-- Use environment variables for all sensitive data
-- Implement rate limiting on API routes in production
-- Enable HTTPS in production
-
-## 📝 TODO / Future Enhancements
-
-- [ ] Add real hero images/videos
-- [ ] Integrate actual Stripe payment flow
-- [ ] Build admin dashboard for managing events/menu
-- [ ] Add Google Analytics
-- [ ] Implement email notifications
-- [ ] Add Instagram feed integration
-- [ ] Set up automated backups
-- [ ] Add calendar sync (Google Calendar/Calendly)
-- [ ] Implement review system
-- [ ] Add multi-language support
-
-## 🆘 Troubleshooting
-
-### Images not loading
-- Check that Cloudflare Images is properly configured
-- Verify environment variables are set
-- Check browser console for errors
-
-### Firebase connection issues
-- Verify Firebase config in `.env.local`
-- Check Firebase Console for proper setup
-- Ensure Firestore rules are applied
-
-### Build errors
-- Delete `.next` folder and `node_modules`
-- Run `npm install` again
-- Check for TypeScript errors: `npm run build`
-
-## 📧 Support
-
-For issues or questions, contact:
-- Email: info@lowkeycoki.com
-- Phone: (340) 555-1234
-
-## 📄 License
-
-All rights reserved © 2024 Lowkey Coki
 
 ---
 
-Built with ❤️ for Coki Beach, St. Thomas, USVI
+## 🔧 Configuration
+
+### GitHub Pages Settings
+
+1. Repository: `akouviyk/lowkeycoki`
+2. Source: GitHub Actions (or gh-pages branch)
+3. Custom domain: (Optional)
+
+### Environment Variables
+
+Create `.env.local` for local development:
+
+```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+Production uses: `https://akouviyk.github.io/lowkeycoki`
+
+---
+
+## 📦 Key Technologies
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Deployment**: GitHub Pages
+- **CI/CD**: GitHub Actions
+
+---
+
+## 🐛 Troubleshooting
+
+### Blank Page Issue
+
+If you see a blank page:
+
+1. **Clear cache**: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
+2. **Check console**: Press F12 and look for errors
+3. **Verify build**: Run `npm run build` and check for errors
+4. **Check paths**: Ensure all imports use correct paths
+
+### CSS Not Loading
+
+```bash
+# Rebuild the project
+rm -rf .next out node_modules/.cache
+npm run build
+```
+
+### 404 on Navigation
+
+This is normal for GitHub Pages. Use the navigation menu instead of direct URLs.
+
+### Deployment Failed
+
+```bash
+# Check GitHub Actions logs
+# Repository → Actions → Latest workflow
+
+# Or check gh-pages deployment
+git log --oneline gh-pages
+```
+
+---
+
+## 📚 Documentation
+
+- **Full Deployment Guide**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+- **Next.js Docs**: [nextjs.org/docs](https://nextjs.org/docs)
+- **GitHub Pages**: [docs.github.com/pages](https://docs.github.com/pages)
+
+---
+
+## 🔍 Pre-deployment Check
+
+Run the check script before deploying:
+
+```bash
+chmod +x check-deployment.sh
+./check-deployment.sh
+```
+
+---
+
+## 📝 Common Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build production site |
+| `npm run deploy` | Deploy to GitHub Pages |
+| `npm run lint` | Check code quality |
+
+---
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Test locally: `npm run dev`
+4. Build: `npm run build`
+5. Commit and push
+6. Create a pull request
+
+---
+
+## 📄 License
+
+Private - All rights reserved
+
+---
+
+## 📞 Support
+
+- **Repository Issues**: [GitHub Issues](https://github.com/akouviyk/lowkeycoki/issues)
+- **Email**: info@lowkeycoki.com
+- **Instagram**: [@lowkeycoki](https://instagram.com/lowkeycoki)
+
+---
+
+## ✅ Deployment Checklist
+
+Before deploying to production:
+
+- [ ] All images optimized and in `public/` folder
+- [ ] Environment variables configured
+- [ ] Build succeeds locally (`npm run build`)
+- [ ] No console errors in browser
+- [ ] All links work correctly
+- [ ] Forms submit properly
+- [ ] Mobile responsive
+- [ ] SEO metadata correct
+- [ ] GitHub Pages settings verified
+
+---
+
+**Built with ❤️ for the Caribbean's best beach hookah experience**
+
+🏖️ **Lowkey Coki** - *Sunsets · Beach · Beats & Clouds*

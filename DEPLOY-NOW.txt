@@ -1,0 +1,132 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                    🚀 DEPLOYMENT QUICK START                  ║
+║              Lowkey Coki - GitHub Pages                       ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📍 CURRENT LOCATION: /Users/akouvi/Desktop/lowkey coki
+
+═══════════════════════════════════════════════════════════════
+
+✅ FILES UPDATED:
+   • next.config.js          (Fixed config)
+   • src/app/layout.tsx      (Fixed metadata)
+   • package.json            (Updated scripts)
+   • src/app/not-found.tsx   (Custom 404)
+
+📝 NEW DOCUMENTATION:
+   • DEPLOYMENT_GUIDE.md     (Complete guide)
+   • README.md               (Quick start)
+   • check-deployment.sh     (Pre-flight check)
+   • deploy-simple.sh        (Deploy script)
+
+═══════════════════════════════════════════════════════════════
+
+🚀 DEPLOY NOW (Choose ONE method):
+
+METHOD 1: Automatic Deploy (Recommended)
+─────────────────────────────────────────
+git add .
+git commit -m "Fix GitHub Pages deployment"
+git push origin main
+
+✓ GitHub Actions will automatically deploy
+✓ Check progress: github.com/akouviyk/lowkeycoki/actions
+
+METHOD 2: Manual Deploy
+─────────────────────────────────────────
+npm run deploy
+
+✓ Builds and pushes to gh-pages branch
+✓ Faster for quick updates
+
+METHOD 3: Using Script
+─────────────────────────────────────────
+chmod +x deploy-simple.sh
+./deploy-simple.sh
+
+✓ Handles everything automatically
+✓ Shows helpful messages
+
+═══════════════════════════════════════════════════════════════
+
+🧪 TEST BEFORE DEPLOYING:
+
+chmod +x check-deployment.sh
+./check-deployment.sh
+
+═══════════════════════════════════════════════════════════════
+
+🌐 LIVE URL:
+   https://akouviyk.github.io/lowkeycoki
+
+⏰ DEPLOYMENT TIME: 2-5 minutes after push
+
+═══════════════════════════════════════════════════════════════
+
+🔧 GITHUB SETTINGS:
+
+1. Go to: github.com/akouviyk/lowkeycoki/settings/pages
+
+2. Verify settings:
+   Source: GitHub Actions (or gh-pages branch)
+   ✓ Must be enabled
+
+═══════════════════════════════════════════════════════════════
+
+🐛 IF BLANK PAGE:
+
+1. Clear cache:     Ctrl+Shift+R (Win) / Cmd+Shift+R (Mac)
+2. Wait 5 minutes:  Deployment may still be processing
+3. Check console:   F12 → Console (look for errors)
+4. Rebuild:         npm run build && npm run deploy
+
+═══════════════════════════════════════════════════════════════
+
+📋 COMMON COMMANDS:
+
+Development:
+  npm run dev       → Start dev server (localhost:3000)
+  npm run build     → Build for production
+  npm run lint      → Check code
+
+Deployment:
+  npm run deploy    → Deploy to GitHub Pages
+  git push          → Auto-deploy via Actions
+
+Testing:
+  ./check-deployment.sh    → Pre-flight check
+  ./deploy-simple.sh       → Deploy with script
+
+═══════════════════════════════════════════════════════════════
+
+✅ SUCCESS CHECKLIST:
+
+After deploying, verify:
+□ Site loads at URL above
+□ No errors in browser console (F12)
+□ All sections visible (Hero, Events, Menu, etc.)
+□ Navigation works
+□ Images load
+□ Video plays
+□ Forms work
+□ Mobile responsive
+
+═══════════════════════════════════════════════════════════════
+
+📚 NEED MORE HELP?
+
+• Full Guide:     Open DEPLOYMENT_GUIDE.md
+• Quick Start:    Open README.md
+• GitHub Logs:    github.com/akouviyk/lowkeycoki/actions
+• Issues:         github.com/akouviyk/lowkeycoki/issues
+
+═══════════════════════════════════════════════════════════════
+
+🎉 YOU'RE ALL SET!
+
+Your Next.js site is configured for GitHub Pages.
+Just run one of the deploy commands above.
+
+Good luck! 🚀🏖️
+
+═══════════════════════════════════════════════════════════════

@@ -8,6 +8,9 @@ export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Determine basePath at runtime
+  const basePath = process.env.NODE_ENV === 'production' ? '/lowkeycoki' : '';
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -33,7 +36,7 @@ export default function Hero() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/girl-smoking-hookah.mp4" type="video/mp4" />
+          <source src={`${basePath}/girl-smoking-hookah.mp4`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
