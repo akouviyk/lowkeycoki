@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // ✅ replaces `next export`
-  basePath: '/lowkeycoki', // ✅ needed for GitHub Pages subdirectory
-  assetPrefix: '/lowkeycoki', // ✅ ensures assets load from correct path
+  output: 'export',
+  basePath: '/lowkeycoki',
   images: {
-    unoptimized: true, // ✅ needed for static exports
+    unoptimized: true,
   },
-  trailingSlash: true, // optional: helps with GitHub Pages routing
+  trailingSlash: true,
 };
 
 export default nextConfig;
