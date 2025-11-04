@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   basePath: '/lowkeycoki',
+  assetPrefix: 'https://akouviyk.github.io/lowkeycoki',
   images: {
     unoptimized: true,
   },
