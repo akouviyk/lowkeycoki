@@ -1,7 +1,7 @@
 {
   "name": "lowkey-coki",
   "version": "0.1.0",
-  "homepage": "https://akouviyk.github.io/lokicoki",
+  "homepage": "https://akouviyk.github.io/lowkeycoki",
   "private": true,
   "scripts": {
     "dev": "next dev",
